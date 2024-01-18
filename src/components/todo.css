@@ -10,3 +10,10 @@
     background-color: rgb(108, 105, 140);
     min-height:40vh ;
 }
+
+.eachItem{
+    display: inline-block;
+    display:flex;
+    justify-content: space-between;
+    
+}

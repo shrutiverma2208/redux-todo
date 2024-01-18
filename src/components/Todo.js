@@ -32,7 +32,7 @@ const dispatch= useDispatch();
         
 
         <div className='add-items'>
-          <input type="text" placeholder="Enter items..."
+          <input style={{padding:"6px 8px",borderRadius:'15px'}} type="text" placeholder="Enter items..."
            value={inputData}  onChange={(e)=>setInputData(e.target.value)}></input>
            <i className='fa fa-plus add-btn' onClick={()=> { if (inputData.trim() !== '') {
             dispatch(addTodo(inputData,  setInputData("")))}}}></i>
@@ -50,7 +50,7 @@ const dispatch= useDispatch();
                         {elem.isEditing?
                              <>
                            <input  style={{padding:'1px 1px'}} type="text"  value={inputData}
-                           placeholder="Enter edited item here..."
+                            placeholder="Enter edited item here..."
                             onChange={(e)=>setInputData(e.target.value)}>
                           </input>
                           <button>   
