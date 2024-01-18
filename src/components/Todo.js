@@ -70,7 +70,8 @@ const dispatch= useDispatch();
                            </img>
                         </button>
                       </>
-                        :<h3> {elem.data}--{elem.time}</h3> 
+                        :
+                        <div style={{display:'flex'}}><h3> {elem.data}</h3> <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created at {elem.time}</div> </div>
                         }   
                    <div>
                       
@@ -81,19 +82,19 @@ const dispatch= useDispatch();
                          {elem.isStrikeThrough? 
                          <>
                            <button>
-                             <img src={deleteIcon} style={{padding:'1px 1px'}} width={'30px'} alt="" 
+                             <img src={deleteIcon} width={'20px'} alt="" 
                              onClick={()=>dispatch(deleteTodo(elem.id))}
                              ></img>
                            </button>
                            <button>
-                             <img style={{padding:'1px 1px'}} src={restore} width={'30px'}  alt=""
+                             <img style={{padding:'1px 1px'}} src={restore} width={'20px'}  alt=""
                              disable={!elem.isStrikeThrough}
                              onClick={()=>dispatch(unStrikeTodo(elem.id))} ></img>
                            </button>
                            </>:<>
-                        <button>
+                        <button style={{margin:'1em' }}>
                          
-                           <img src={editIcon} style={{padding:'1px 1px'}} width={'30px'} alt="" 
+                           <img src={editIcon}  width={'20px'} alt="" 
                            onClick={()=>
                          
                            dispatch(editTodo(elem.id,elem.data), setEditing(elem.id),
@@ -104,7 +105,7 @@ const dispatch= useDispatch();
                        </button>
                          <button>
                          <img src={strikeText} 
-                         style={{padding:'1px 1px'}} width={'30px'} 
+                         style={{padding:'1px 1px'}} width={'20px'} 
                          disable={elem.isStrikeThrough}
                          onClick={()=>dispatch(toggleStrikeThrough(elem.id))}>
                          </img>
