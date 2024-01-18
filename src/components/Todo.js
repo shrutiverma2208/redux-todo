@@ -8,6 +8,7 @@ import strikeText from "../images/strikeText.jpeg";
 import editIcon from "../images/editIcon.png";
 import done from "../images/done.png";
 import cancle from "../images/cancle.png";
+import logo from "../images/logo.png";
 
 const Todo = () => {
 
@@ -21,12 +22,11 @@ const deletedList= useSelector((state)=>state.todoReducers.deletedList);
 
 const dispatch= useDispatch();
 
-
   return (
     <>
     <div className='main-div'>
       <div className='chlid-div'>
-       
+       <img style={{marginTop:'3rem',maxHeight:'11vh',marginLeft:'2rem',backgroundColor:"green"}} src={logo}></img>
         <h2>Add your items here</h2>
         
 

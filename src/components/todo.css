@@ -1,3 +1,12 @@
-main-div{
-    background-color: aquamarine;
+.main-div{
+    background-color: rgb(105, 180, 196);
+    min-height: 70vh;
+    min-width: 80vw;
+    display: flex;
+    justify-content: center;
+
+}
+.child-div{
+    background-color: green;
+    min-height:40vh ;
 }
