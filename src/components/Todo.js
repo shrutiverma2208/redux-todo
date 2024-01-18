@@ -9,6 +9,7 @@ import editIcon from "../images/editIcon.png";
 import done from "../images/done.png";
 import cancle from "../images/cancle.png";
 import logo from "../images/logo.png";
+import { hover } from '@testing-library/user-event/dist/hover';
 
 const Todo = () => {
 
@@ -122,11 +123,11 @@ const dispatch= useDispatch();
           
 
          </div>
-            <div className='showItems'>
-               <button className='btn effect04' 
-               data-sm-link-text="remove All" 
+            <div className='clearItem'>
+               <button  style={{backgroundColor: 'rgb(181, 73, 40)',
+    color:'aliceblue',padding:'8px 20px',opacity:'.8',cursor:'pointer', hover:{opacity:'1.5'},borderRadius:'8px' }}
                onClick={()=>dispatch(removeTodo())}>
-                <span>Clear List</span></button>
+                Clear List</button>
                
            </div>
       </div>
