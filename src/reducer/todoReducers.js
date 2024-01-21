@@ -1,7 +1,7 @@
 
 const initialData={
     list:[],
-    deletedList:[]
+    
 };
 
 

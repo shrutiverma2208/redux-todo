@@ -44,6 +44,7 @@ const addItemHandler =(data)=>{
             data:data,
             isStrikeThrough:false,
             time:new Date().toLocaleString(),
+            updatedAt:new Date().toLocaleString(),
             isEditing:false,
   }
   const newList=list.concat([newElement])
@@ -66,9 +67,11 @@ const handleEditTodo = (id)=>{
     console.log(updatedData)
   dispatch(updateList(updatedData))
   
+  
 }
  
 const handleUpdateTodo=(id,data)=>{
+
   if(!data){
 return
   }
@@ -76,6 +79,7 @@ return
     if(element.id===id){
       element.data=data
       element.isEditing=false
+      element.updatedAt=new Date().toLocaleString()
     }
     return element
    
@@ -84,6 +88,7 @@ return
   )
   console.log(updatedData)
   dispatch(updateList(updatedData))
+
     setInputData('') 
     
   }
@@ -139,7 +144,11 @@ const dispatch= useDispatch();
                         </button>
                       </>
                         :
-                        <div style={{display:'flex'}}><h3> {elem.data}</h3> <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created at {elem.time}</div> </div>
+                        <div style={{display:'flex'}}><h3> {elem.data}</h3> 
+                        <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created at {elem.time}</div> 
+                       
+                        <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Last Modified:{elem.updatedAt}</div> 
+                        </div>
                         }   
                    <div>
                        
