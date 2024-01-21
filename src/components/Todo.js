@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import todo from './todo.css'
-import { addTodo,deleteTodo,removeTodo,toggleStrikeThrough,undoTodo,editTodo,unStrikeTodo,cancelEdit} from '../actions/index'
+import { updateList,editTodo,cancelEdit} from '../actions/index'
 import { useSelector,useDispatch } from 'react-redux';
 import restore from "../images/restore.jpeg";
 import deleteIcon from "../images/deleteIcon.png";
@@ -9,7 +9,6 @@ import editIcon from "../images/editIcon.png";
 import done from "../images/done.png";
 import cancle from "../images/cancle.png";
 import logo from "../images/logo.png";
-import { hover } from '@testing-library/user-event/dist/hover';
 
 const Todo = () => {
 
@@ -18,7 +17,76 @@ const [editing,setEditing]=useState(null);
 
 
 const list= useSelector((state)=>state.todoReducers.list);
-const deletedList= useSelector((state)=>state.todoReducers.deletedList);
+
+const toggleSoftDeleteHandler = (id) => {
+    const updatedData = list.map(element => {
+        if(element.id === id){
+          element.isStrikeThrough = !element.isStrikeThrough;
+          return element
+        }else {
+          return element
+        }
+      })
+    dispatch(updateList(updatedData))
+  }
+
+const deleteAllHandler = () => {
+  const updatedData = []
+  dispatch(updateList(updatedData))
+}
+
+const addItemHandler =(data)=>{
+  if(!data){
+    return
+  }
+  const newElement={
+            id:new Date().getTime().toString(),
+            data:data,
+            isStrikeThrough:false,
+            time:new Date().toLocaleString(),
+            isEditing:false,
+  }
+  const newList=list.concat([newElement])
+  dispatch(updateList(newList))
+  setInputData('')
+}
+const handlePermanentDelete = (id)=>{
+  const updatedData= list.filter((element)=>(element.id !==id))
+  
+  dispatch(updateList(updatedData))
+}
+const handleEditTodo = (id)=>{
+  const updatedData = list.map(element => {
+    if(element.id === id){
+      element.isEditing = !element.isEditing;
+      return element
+    }else {
+      return element
+    }})
+    console.log(updatedData)
+  dispatch(updateList(updatedData))
+  
+}
+ 
+const handleUpdateTodo=(id,data)=>{
+  if(!data){
+return
+  }
+  const updatedData=list.map(element=>{
+    if(element.id===id){
+      element.data=data
+      element.isEditing=false
+    }
+    return element
+   
+  } 
+   
+  )
+  console.log(updatedData)
+  dispatch(updateList(updatedData))
+    setInputData('') 
+    
+  }
 
 
 const dispatch= useDispatch();
@@ -34,8 +102,7 @@ const dispatch= useDispatch();
         <div className='add-items'>
           <input style={{padding:"6px 8px",borderRadius:'15px'}} type="text" placeholder="Enter items..."
            value={inputData}  onChange={(e)=>setInputData(e.target.value)}></input>
-           <i className='fa fa-plus add-btn' onClick={()=> { if (inputData.trim() !== '') {
-            dispatch(addTodo(inputData,  setInputData("")))}}}></i>
+           <i className='fa fa-plus add-btn' onClick={()=> { addItemHandler(inputData)}}></i>
  
         </div>
         <div style={{display:'inline-block',textDecoration:'none'}}>
@@ -49,24 +116,22 @@ const dispatch= useDispatch();
                         key={elem.id}>
                         {elem.isEditing?
                              <>
-                           <input  style={{padding:'1px 1px'}} type="text"  value={inputData}
-                            placeholder="Enter edited item here..."
+                           <input  style={{padding:'1px 1px'}} 
+                           type="text" 
+                            value={inputData}
+                            
                             onChange={(e)=>setInputData(e.target.value)}>
                           </input>
                           <button>   
-                            <img src={done}   width={'15px'}
-                            onClick={()=>{if(inputData .trim()!=='') {
-                               
-                               dispatch(editTodo(editing,inputData),setEditing(null),setInputData)
-                               
-                            }}}>
+                            <img src={done}  
+                             width={'15px'}
+                            onClick={()=>handleUpdateTodo(elem.id,inputData)}>
                             </img>
                           </button>
 
                          <button>
                             <img src={cancle}   width={'15px'}
-                            onClick={()=>dispatch(cancelEdit()
-                              )}>
+                            onClick={()=>handleEditTodo(elem.id)}>
                            </img>
                         </button>
                       </>
@@ -74,31 +139,24 @@ const dispatch= useDispatch();
                         <div style={{display:'flex'}}><h3> {elem.data}</h3> <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created at {elem.time}</div> </div>
                         }   
                    <div>
-                      
-                          
-                        
-                        
-                          
+                       
                          {elem.isStrikeThrough? 
                          <>
                            <button>
                              <img src={deleteIcon} width={'20px'} alt="" 
-                             onClick={()=>dispatch(deleteTodo(elem.id))}
+                             onClick={()=>handlePermanentDelete(elem.id)}
                              ></img>
                            </button>
                            <button>
                              <img style={{padding:'1px 1px'}} src={restore} width={'20px'}  alt=""
                              disable={!elem.isStrikeThrough}
-                             onClick={()=>dispatch(unStrikeTodo(elem.id))} ></img>
+                             onClick={()=>toggleSoftDeleteHandler(elem.id)} ></img>
                            </button>
                            </>:<>
                         <button style={{margin:'1em' }}>
                          
                            <img src={editIcon}  width={'20px'} alt="" 
-                           onClick={()=>
-                         
-                           dispatch(editTodo(elem.id,elem.data), setEditing(elem.id),
-                           setInputData(elem.data))
+                           onClick={()=>handleEditTodo(elem.id)
                          }
                            ></img>
 
@@ -107,7 +165,7 @@ const dispatch= useDispatch();
                          <img src={strikeText} 
                          style={{padding:'1px 1px'}} width={'20px'} 
                          disable={elem.isStrikeThrough}
-                         onClick={()=>dispatch(toggleStrikeThrough(elem.id))}>
+                         onClick={()=>toggleSoftDeleteHandler(elem.id)}>
                          </img>
                        </button>
                         </>
@@ -127,7 +185,7 @@ const dispatch= useDispatch();
             <div className='clearItem'>
                <button  style={{backgroundColor: 'rgb(181, 73, 40)',
     color:'aliceblue',padding:'8px 20px',opacity:'.8',cursor:'pointer', hover:{opacity:'1.5'},borderRadius:'8px' }}
-               onClick={()=>dispatch(removeTodo())}>
+               onClick={()=>deleteAllHandler()}>
                 Clear List</button>
                
            </div>
