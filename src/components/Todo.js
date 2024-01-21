@@ -100,30 +100,33 @@ const dispatch= useDispatch();
         
 
         <div className='add-items'>
+          
           <input style={{padding:"6px 8px",borderRadius:'15px'}} type="text" placeholder="Enter items..."
            value={inputData}  onChange={(e)=>setInputData(e.target.value)}></input>
            <i className='fa fa-plus add-btn' onClick={()=> { addItemHandler(inputData)}}></i>
- 
+           
         </div>
         <div style={{display:'inline-block',textDecoration:'none'}}>
+        
             {
               list.map((elem)=>{
                 
                 return(
-                  
+                 
                      <div className="eachItem"  
                         style={{textDecoration: elem.isStrikeThrough ? "line-through" : "none"}} 
                         key={elem.id}>
                         {elem.isEditing?
                              <>
-                           <input  style={{padding:'1px 1px'}} 
+                           <input  style={{padding:".5px 1px",borderRadius:'15px',color:"white",backgroundColor:"grey",fontSize:"large",fontStyle:"italic"}}
                            type="text" 
                             value={inputData}
                             
                             onChange={(e)=>setInputData(e.target.value)}>
                           </input>
                           <button>   
-                            <img src={done}  
+                            <img 
+                            src={done}  
                              width={'15px'}
                             onClick={()=>handleUpdateTodo(elem.id,inputData)}>
                             </img>
@@ -172,10 +175,12 @@ const dispatch= useDispatch();
                         }
                         
                          
-                         
+                            
                   </div>
                             
-           </div>
+          
+                 </div>
+               
             )
                 })
         }
