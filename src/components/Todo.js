@@ -8,6 +8,7 @@ import strikeText from "../images/strikeText.jpeg";
 import editIcon from "../images/editIcon.png";
 import done from "../images/done.png";
 import cancle from "../images/cancle.png";
+import add from "../images/add.png";
 import logo from "../images/logo.png";
 
 const Todo = () => {
@@ -86,7 +87,7 @@ return
   } 
    
   )
-  console.log(updatedData)
+  
   dispatch(updateList(updatedData))
 
     setInputData('') 
@@ -106,12 +107,13 @@ const dispatch= useDispatch();
 
         <div className='add-items'>
           
-          <input style={{padding:"6px 8px",borderRadius:'15px'}} type="text" placeholder="Enter items..."
+          <input style={{padding:"6px 8px",borderRadius:'15px',width:"300px",margin:'50px 25px'}} type="text" placeholder="Enter items..."
            value={inputData}  onChange={(e)=>setInputData(e.target.value)}></input>
-           <i className='fa fa-plus add-btn' onClick={()=> { addItemHandler(inputData)}}></i>
-           
+           <button>
+           <img src={add} width="16px" style={{width:'30px'}} onClick={()=> { addItemHandler(inputData)}}></img>
+           </button>
         </div>
-        <div style={{display:'inline-block',textDecoration:'none'}}>
+        <div className='list-items'>
         
             {
               list.map((elem)=>{
@@ -129,7 +131,7 @@ const dispatch= useDispatch();
                             
                             onChange={(e)=>setInputData(e.target.value)}>
                           </input>
-                          <button>   
+                          <button style={{margin:'1px' }}>   
                             <img 
                             src={done}  
                              width={'15px'}
@@ -138,7 +140,10 @@ const dispatch= useDispatch();
                           </button>
 
                          <button>
-                            <img src={cancle}   width={'15px'}
+                            <img 
+                            src={cancle}  
+                             width={'15px'}
+                             
                             onClick={()=>handleEditTodo(elem.id)}>
                            </img>
                         </button>
@@ -146,6 +151,7 @@ const dispatch= useDispatch();
                         :
                         <div style={{display:'flex'}}><h3> {elem.data}</h3> 
                         <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created at {elem.time}</div> 
+                      
                        
                         <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Last Modified:{elem.updatedAt}</div> 
                         </div>
@@ -154,7 +160,7 @@ const dispatch= useDispatch();
                        
                          {elem.isStrikeThrough? 
                          <>
-                           <button>
+                           <button style={{margin:'1em' }}>
                              <img src={deleteIcon} width={'20px'} alt="" 
                              onClick={()=>handlePermanentDelete(elem.id)}
                              ></img>
@@ -175,7 +181,7 @@ const dispatch= useDispatch();
                        </button>
                          <button>
                          <img src={strikeText} 
-                         style={{padding:'1px 1px'}} width={'20px'} 
+                          width={'20px'} 
                          disable={elem.isStrikeThrough}
                          onClick={()=>toggleSoftDeleteHandler(elem.id)}>
                          </img>
@@ -195,9 +201,9 @@ const dispatch= useDispatch();
         }
           
 
-         </div>
+      </div>
             <div className='clearItem'>
-               <button  style={{backgroundColor: 'rgb(181, 73, 40)',
+               <button  style={{backgroundColor: 'rgb(181, 73, 40)',margin:"40px",
     color:'aliceblue',padding:'8px 20px',opacity:'.8',cursor:'pointer', hover:{opacity:'1.5'},borderRadius:'8px' }}
                onClick={()=>deleteAllHandler()}>
                 Clear List</button>
