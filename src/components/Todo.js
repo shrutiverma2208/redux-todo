@@ -182,23 +182,23 @@ const dispatch= useDispatch();
                              disable={!elem.isStrikeThrough}
                              onClick={()=>toggleSoftDeleteHandler(elem.id)} ></img>
                            </button>
-                           </>:<>
-                        <button style={{margin:'auto 5px' }}>
-                         
-                           <img src={editIcon}  width={'20px'} alt="" 
-                           onClick={()=>handleEditTodo(elem.id)
-                         }
-                           ></img>
+                           </>:(elem.isEditing?null:<>
+                                <button style={{margin:'auto 5px' }}>
+                                
+                                  <img src={editIcon}  width={'20px'} alt="" 
+                                  onClick={()=>handleEditTodo(elem.id)
+                                          }
+                                  ></img>
 
-                       </button>
-                         <button>
-                         <img src={strikeText} 
-                          width={'20px'} 
-                         disable={elem.isStrikeThrough}
-                         onClick={()=>toggleSoftDeleteHandler(elem.id)}>
-                         </img>
-                       </button>
-                        </>
+                              </button>
+                              <button>
+                                <img src={strikeText} 
+                                  width={'20px'} 
+                                disable={elem.isStrikeThrough}
+                                onClick={()=>toggleSoftDeleteHandler(elem.id)}>
+                                </img>
+                            </button>
+                        </>)
                         }
                         
                          
