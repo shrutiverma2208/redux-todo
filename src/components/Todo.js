@@ -102,15 +102,24 @@ const dispatch= useDispatch();
     <div className='main-div'>
       <div className='chlid-div'>
        <img style={{marginTop:'3rem',maxHeight:'11vh',marginLeft:'2rem',backgroundColor:"green"}} src={logo}></img>
-        <h2>Add your items here</h2>
+        <h2 style={{marginTop:'3rem'}}>Add your items here</h2>
         
 
         <div className='add-items'>
           
-          <input style={{padding:"6px 8px",borderRadius:'15px',width:"300px",margin:'50px 25px'}} type="text" placeholder="Enter items..."
-           value={inputData}  onChange={(e)=>setInputData(e.target.value)}></input>
+          <input style={{padding:"6px 8px",borderRadius:'15px',width:"300px",margin:'50px 25px'}}
+             type="text" 
+             placeholder="Apple"
+             value={inputData}  
+             onChange={(e)=>setInputData(e.target.value)}
+             onKeyDown={(e) => e.key === 'Enter' && addItemHandler(inputData)}>
+          </input>
+
            <button>
-           <img src={add} width="16px" style={{width:'30px'}} onClick={()=> { addItemHandler(inputData)}}></img>
+            <img src={add} width="16px" 
+             style={{width:'25px',marginBottom:'-2px'}} 
+             onClick={()=> {addItemHandler(inputData)}}>
+            </img>
            </button>
        </div>
         <div className='list-items'>
@@ -125,7 +134,7 @@ const dispatch= useDispatch();
                         key={elem.id}>
                         {elem.isEditing?
                              <>
-                           <input  style={{padding:".5px 1px",height:"30px",width:'400px',borderRadius:'15px',color:"white",backgroundColor:"grey",fontSize:"large",fontStyle:"italic"}}
+                           <input  style={{padding:"4px 6px",height:"30px",width:'400px',borderRadius:'15px',color:"white",backgroundColor:"grey",fontSize:"large",fontStyle:"italic"}}
                            type="text" 
                             value={inputData}
                             
@@ -153,10 +162,10 @@ const dispatch= useDispatch();
                         <div 
                         style={{display:'flex'}}><h4> {elem.data}</h4> 
                         
-                        <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created at {elem.time}</div> 
+                        <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created At : {elem.time}</div> 
                       
                        
-                        <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Last Modified:{elem.updatedAt}</div> 
+                        <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Last Modified : {elem.updatedAt}</div> 
                         </div>
                         }   
                    <div>
