@@ -112,7 +112,7 @@ const dispatch= useDispatch();
            <button>
            <img src={add} width="16px" style={{width:'30px'}} onClick={()=> { addItemHandler(inputData)}}></img>
            </button>
-        </div>
+       </div>
         <div className='list-items'>
         
             {
@@ -125,31 +125,34 @@ const dispatch= useDispatch();
                         key={elem.id}>
                         {elem.isEditing?
                              <>
-                           <input  style={{padding:".5px 1px",borderRadius:'15px',color:"white",backgroundColor:"grey",fontSize:"large",fontStyle:"italic"}}
+                           <input  style={{padding:".5px 1px",height:"30px",width:'400px',borderRadius:'15px',color:"white",backgroundColor:"grey",fontSize:"large",fontStyle:"italic"}}
                            type="text" 
                             value={inputData}
                             
                             onChange={(e)=>setInputData(e.target.value)}>
                           </input>
-                          <button style={{margin:'1px' }}>   
+                          <button style={{margin:'auto 1px' }}>   
                             <img 
                             src={done}  
-                             width={'15px'}
+                             width={'20px'}
                             onClick={()=>handleUpdateTodo(elem.id,inputData)}>
                             </img>
                           </button>
 
-                         <button>
+                         <button style={{margin:'auto 1px' }}>
                             <img 
                             src={cancle}  
-                             width={'15px'}
+                             width={'20px'}
                              
                             onClick={()=>handleEditTodo(elem.id)}>
                            </img>
                         </button>
                       </>
                         :
-                        <div style={{display:'flex'}}><h3> {elem.data}</h3> 
+                        
+                        <div 
+                        style={{display:'flex'}}><h4> {elem.data}</h4> 
+                        
                         <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created at {elem.time}</div> 
                       
                        
@@ -160,7 +163,7 @@ const dispatch= useDispatch();
                        
                          {elem.isStrikeThrough? 
                          <>
-                           <button style={{margin:'1em' }}>
+                           <button style={{margin:'auto 5px' }}>
                              <img src={deleteIcon} width={'20px'} alt="" 
                              onClick={()=>handlePermanentDelete(elem.id)}
                              ></img>
@@ -171,7 +174,7 @@ const dispatch= useDispatch();
                              onClick={()=>toggleSoftDeleteHandler(elem.id)} ></img>
                            </button>
                            </>:<>
-                        <button style={{margin:'1em' }}>
+                        <button style={{margin:'auto 5px' }}>
                          
                            <img src={editIcon}  width={'20px'} alt="" 
                            onClick={()=>handleEditTodo(elem.id)
@@ -199,14 +202,13 @@ const dispatch= useDispatch();
             )
                 })
         }
-          
+       
 
       </div>
-            <div className='clearItem'>
-               <button  style={{backgroundColor: 'rgb(181, 73, 40)',margin:"40px",
-    color:'aliceblue',padding:'8px 20px',opacity:'.8',cursor:'pointer', hover:{opacity:'1.5'},borderRadius:'8px' }}
+            <div >
+               <button  className='clearItem'
                onClick={()=>deleteAllHandler()}>
-                Clear List</button>
+               <h3>Clear List</h3> </button>
                
            </div>
       </div>
