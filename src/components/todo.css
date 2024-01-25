@@ -61,3 +61,8 @@
 .clearItem:hover{
     background-color: brown;
 }
+.items{
+    display: block;
+    margin: auto;
+    
+}

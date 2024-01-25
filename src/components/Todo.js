@@ -18,7 +18,6 @@ const [editing,setEditing]=useState(null);
 
 
 const list= useSelector((state)=>state.todoReducers.list);
-
 const toggleSoftDeleteHandler = (id) => {
     const updatedData = list.map(element => {
         if(element.id === id){
@@ -159,13 +158,15 @@ const dispatch= useDispatch();
                       </>
                         :
                         
-                        <div 
-                        style={{display:'flex'}}><h4> {elem.data}</h4> 
-                        
-                        <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Created At : {elem.time}</div> 
-                      
-                       
-                        <div style={{fontSize:'12px', fontStyle:'italic', color:'white', margin:'auto 1em'}}> Last Modified : {elem.updatedAt}</div> 
+                        <div className='items'>
+                          
+                        <h4 style={{marginBottom:'6px'}}> {elem.data}</h4> 
+                        <div style={{display:'inline-grid'}}>
+                        <div style={{fontSize:'10px', fontStyle:'italic', color:'white'}}>
+                          
+                          <span style={{margin:'12px'}}>Created At :{elem.time}</span><span style={{margin:'12px'}}>Last Modified : {elem.updatedAt}</span> 
+                          </div>
+                        </div>
                         </div>
                         }   
                    <div>
