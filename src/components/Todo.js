@@ -162,7 +162,7 @@ const dispatch= useDispatch();
                           
                         <h4 style={{marginBottom:'6px'}}> {elem.data}</h4> 
                         <div style={{display:'inline-grid'}}>
-                        <div style={{fontSize:'10px', fontStyle:'italic', color:'white'}}>
+                        <div style={{fontSize:'10px', fontStyle:'italic', color:'white',display:'flex'}}>
                           
                           <span style={{margin:'12px'}}>Created At :{elem.time}</span><span style={{margin:'12px'}}>Last Modified : {elem.updatedAt}</span> 
                           </div>
